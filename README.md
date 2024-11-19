@@ -1,24 +1,23 @@
-# github-repo-explorer
+# GitHub Repository Explorer
 
-## Project setup
-```
-npm install
-```
+## Overview
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+A simple web application to explore GitHub user repositories.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Features
 
-### Lints and fixes files
-```
-npm run lint
-```
+- Enter a GitHub username
+- Fetch public repositories
+- View repository names, star counts, and descriptions
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Installation
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run `npm install` to install dependencies.
+4. Run `npm run serve` to start the application.
+
+## Technologies Used
+
+- Vue.js
+- Axios

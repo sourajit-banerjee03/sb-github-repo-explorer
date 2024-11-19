@@ -1,26 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <input v-model="username" placeholder="Enter GitHub Username" />
+    <button @click="fetchRepos">Get Repos</button>
+    <RepoList 
+      v-if="repositories.length" 
+      :repositories="repositories" 
+      @select="selectRepo" 
+      :selectedRepo="selectedRepo" 
+    />
+    <div v-if="error">{{ error }}</div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import RepoList from './components/RepositoryList.vue';
+import axios from 'axios';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components: { RepoList },
+  data() {
+    return {
+      username: '',
+      repositories: [],
+      selectedRepo: null,
+      error: ''
+    };
+  },
+  methods: {
+    async fetchRepos() {
+      this.error = '';
+      try {
+        const response = await axios.get(`https://api.github.com/users/${this.username}/repos`);
+        this.repositories = response.data;
+      } catch (err) {
+        this.error = 'User not found or API error.';
+      }
+    },
+    selectRepo(repo) {
+      this.selectedRepo = repo;
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* Add some basic styles */
 </style>
