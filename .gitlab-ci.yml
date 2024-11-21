@@ -1,0 +1,28 @@
+stages:
+  - install
+  - build
+
+# Cache dependencies to speed up subsequent jobs
+cache:
+  paths:
+    - node_modules/
+
+# Install dependencies
+install_dependencies:
+  stage: install
+  image: node:18
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+# Build your app
+build_app:
+  stage: build
+  image: node:18
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/ # Ensure your build directory is saved
