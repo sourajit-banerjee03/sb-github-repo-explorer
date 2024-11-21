@@ -1,6 +1,8 @@
 stages:
   - install
+  - test
   - build
+  - deploy
 
 # Cache dependencies to speed up subsequent jobs
 cache:
@@ -17,7 +19,7 @@ install_dependencies:
     paths:
       - node_modules/
 
-# Build your app
+# Build the app
 build_app:
   stage: build
   image: node:18
@@ -25,4 +27,14 @@ build_app:
     - npm run build
   artifacts:
     paths:
-      - dist/ # Ensure your build directory is saved
+      - dist/ # Save build output
+
+# Deploy to Vercel
+deploy_to_vercel:
+  stage: deploy
+  image: node:18
+  script:
+    - npm run deploy
+  needs:
+    - install_dependencies
+    - build_app
