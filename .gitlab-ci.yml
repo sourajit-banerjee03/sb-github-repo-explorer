@@ -28,13 +28,3 @@ build_app:
   artifacts:
     paths:
       - dist/ # Save build output
-
-# Deploy to Vercel
-deploy_to_vercel:
-  stage: deploy
-  image: node:18
-  script:
-    - npm run deploy
-  needs:
-    - install_dependencies
-    - build_app
