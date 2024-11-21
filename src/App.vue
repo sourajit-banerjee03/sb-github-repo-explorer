@@ -1,14 +1,16 @@
 <template>
-  <div id="app">
-    <input v-model="username" placeholder="Enter GitHub Username" />
-    <button @click="fetchRepos">Get Repos</button>
+  <div id="app" class="container">
+    <div class="input-group">
+      <input v-model="username" placeholder="Enter GitHub Username" class="input" />
+      <button @click="fetchRepos" class="button">Get Repos</button>
+    </div>
     <RepoList 
       v-if="repositories.length" 
       :repositories="repositories" 
       @select="selectRepo" 
       :selectedRepo="selectedRepo" 
     />
-    <div v-if="error">{{ error }}</div>
+    <div v-if="error" class="error">{{ error }}</div>
   </div>
 </template>
 
@@ -44,5 +46,43 @@ export default {
 </script>
 
 <style>
-/* Add some basic styles */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  margin-top: 20px;
+}
 </style>
